@@ -22,8 +22,8 @@ export default defineComponent({
     });
     const ShowSideMenuFlag = () => {
       // console.log(menu, '체크');
-      console.log(store, store.commit('menu / SET_SIDEMENU', true), store.state);
-      store.commit[('menu/SET_SIDEMENU', true)];
+      console.log(store.state.menu.ShowSideMenuFlag);
+      store.commit('menu/SET_SIDEMENU', true);
       // store.menu.commit('SET_SIDEMENU', true);
     };
     onMounted(() => {});

@@ -1,5 +1,5 @@
 const state = {
-  showSideMenu: false,
+  ShowSideMenuFlag: false,
 };
 export type RootState = typeof state;
 export type RootMutation = typeof mutations;
@@ -7,11 +7,11 @@ export type RootMutation = typeof mutations;
 
 const mutations = {
   SET_SIDEMENU(state: RootState, flag: boolean) {
-    state.showSideMenu = flag;
+    state.ShowSideMenuFlag = flag;
   },
 };
 
-export default {
+export const menu = {
   namespaced: true,
   mutations,
   state,
