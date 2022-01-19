@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main_wrap">
     <MainHeader></MainHeader>
     <main><slot></slot></main>
     <MainFooter></MainFooter>
@@ -16,4 +16,10 @@ export default defineComponent({
 });
 </script>
 
-<style></style>
+<style lang="scss">
+.main_wrap {
+  width: 640px;
+  margin: 0 auto;
+  background-color: red;
+}
+</style>

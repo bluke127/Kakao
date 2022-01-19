@@ -2,4 +2,6 @@
   <router-view />
 </template>
 
-<style></style>
+<style lang="scss">
+@import '@/styles/common.scss';
+</style>

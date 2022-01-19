@@ -1,18 +1,19 @@
 <template>
   <div>
-    <div class="side__icon--show"></div>
-    <side-menu></side-menu>
+    <slot name="side_show"></slot>
+    <side-menu v-if="showSideMenuFlag"></side-menu>
   </div>
 </template>
 
 <script>
-import SideMenu from './SideMenu.vue'
-export default {
+import SideMenu from './SideMenu.vue';
+import { defineComponent } from 'vue';
+export default defineComponent({
   components: { SideMenu },
-
-}
+  setup() {
+    return {};
+  },
+});
 </script>
 
-<style>
-
-</style>
+<style lang="scss"></style>

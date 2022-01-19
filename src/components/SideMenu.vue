@@ -1,17 +1,11 @@
 <template>
   <div class="side_menu_wrap">
-    <div>
-      
-    </div>
+    <div></div>
   </div>
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
-<style>
-
-</style>
+<style></style>
