@@ -1,19 +1,22 @@
 <template>
   <div>
     <slot name="side_show"></slot>
-    <side-menu v-if="store.state.menu.ShowSideMenuFlag"></side-menu>
+    <side-menu v-show="sideMenuFlag"></side-menu>
   </div>
 </template>
 
 <script lang="ts">
 import SideMenu from './SideMenu.vue';
-import { defineComponent } from 'vue';
+import { defineComponent, computed } from 'vue';
 import { useStore } from 'vuex';
 export default defineComponent({
   components: { SideMenu },
   setup() {
     const store = useStore();
-    return { store };
+    const sideMenuFlag = computed(() => {
+      return store.state.menu.ShowSideMenuFlag;
+    });
+    return { store, sideMenuFlag };
   },
 });
 </script>
