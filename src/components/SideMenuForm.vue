@@ -1,7 +1,7 @@
 <template>
   <div>
     <slot name="side_show"></slot>
-    <side-menu v-show="sideMenuFlag"></side-menu>
+    <side-menu v-if="sideMenuFlag"></side-menu>
   </div>
 </template>
 

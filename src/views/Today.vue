@@ -1,5 +1,13 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <div><SlideWindow /></div>
 </template>
+
+<script lang="ts">
+import { defineComponent } from 'vue';
+import SlideWindow from '@/components/SlideWindow.vue';
+export default defineComponent({
+  components: { SlideWindow },
+});
+</script>
+
+<style></style>
