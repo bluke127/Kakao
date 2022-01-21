@@ -3,8 +3,8 @@
     <ul class="entire">
       <li class="picture" v-for="(e, i) in pictures" :key="i" :ref="imgsPush"></li>
     </ul>
-    <div class="arrow left" @click="prev">&lt;</div>
-    <div class="arrow right" @click="next">&gt;</div>
+    <div class="arrow left" @click="prev($event)">&lt;</div>
+    <div class="arrow right" @click="next($event)">&gt;</div>
   </div>
 </template>
 
@@ -20,17 +20,36 @@ export default defineComponent({
     const imgsPush = (el: HTMLElement) => {
       imgs.value.push(el);
     };
-    const prev = () => {};
-    return { pictures, imgs, imgsPush };
+    const prev = (e: Event) => {
+      alert();
+      console.log(e.target);
+      if (e.target instanceof HTMLElement) {
+        console.log(e.target);
+        e.target.style.transform = 'translateX(-100%)';
+      }
+    };
+    const next = (e: Event) => {};
+    return { pictures, imgs, imgsPush, prev, next };
   },
 });
 </script>
 
 <style lang="scss">
 .picture {
-  transition: tra;
+  transition: all 0.5s ease;
 }
-li {
+.scene {
+  width: 640px;
+}
+.entire {
+  width: 300%;
+  height: 150px;
+  // overflow: hidden;
+  li {
+    width: 640px;
+    height: 100%;
+    float: left;
+  }
   :nth-child(1) {
     background-color: red;
   }

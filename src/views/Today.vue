@@ -1,5 +1,5 @@
 <template>
-  <div><SlideWindow /></div>
+  <div><SlideWindow />ddddd</div>
 </template>
 
 <script lang="ts">
