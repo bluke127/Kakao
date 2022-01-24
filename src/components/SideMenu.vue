@@ -82,6 +82,7 @@ export default defineComponent({
   left: 0;
   top: 0;
   background-color: rgba(0, 0, 0, 0.4);
+  z-index: 2;
   .side_menu {
     width: 400px;
     height: 100%;

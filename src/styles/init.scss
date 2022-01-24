@@ -82,19 +82,19 @@ video,
 input,
 textarea,
 select {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font-family: 'NanumSquareB';
-    font-stretch:100%;
-    font-style:normal;
-    font-variant-caps:normal;
-    font-variant-east-asian:normal;
-font-variant-ligatures:normal;
-font-variant-numeric:normal;
-vertical-align: baseline;
-box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font-family: 'Inter';
+  font-stretch: 100%;
+  font-style: normal;
+  font-variant-caps: normal;
+  font-variant-east-asian: normal;
+  font-variant-ligatures: normal;
+  font-variant-numeric: normal;
+  vertical-align: baseline;
+  box-sizing: border-box;
 }
 
 /* HTML5 display-role reset for older browsers */
@@ -108,35 +108,48 @@ header,
 hgroup,
 menu,
 nav,
-section {}
+section {
+}
 *:focus {
-    outline: none;
+  outline: none;
 }
 /** ====== **/
 body {
-    line-height: 1;
-    margin: 0;
-    font-family: 'NanumSquareB';
-    color: Black;
-    text-align: left;
-    line-height: 1.1;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    letter-spacing: normal;
+  line-height: 1;
+  margin: 0;
+  font-family: 'Inter';
+  color: Black;
+  text-align: left;
+  line-height: 1.1;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
 }
-
-
-
 
 ol,
 ul {
-    list-style: none;
+  list-style: none;
 }
-a,a:visited {color: #fff; text-decoration: none; outline: none}
-a:hover, a:active {text-decoration: none; color:#fff;}
-button{border-radius: 10px; font-size: 16px; color:#fff; cursor:pointer; border:none;
-    font-family: 'NanumSquareB';}
-    label{
-        font-family: 'NanumSquareB';}
-     
+a,
+a:visited {
+  color: #fff;
+  text-decoration: none;
+  outline: none;
+}
+a:hover,
+a:active {
+  text-decoration: none;
+  color: #fff;
+}
+button {
+  border-radius: 10px;
+  font-size: 16px;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+  font-family: 'Inter';
+}
+label {
+  font-family: 'Inter';
+}

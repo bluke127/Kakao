@@ -7,12 +7,7 @@ export const response = {
       like: 61,
       title: '데스크테리어 종결자',
       content: '선없는 충전이 필요하세요?➰🔋얼리어답터 춘식에게 맡겨주세요',
-      img: [
-        'https://t1.kakaocdn.net/friends/prod/main_tab/feed/media/media_1_20220117160133.jpg',
-        'https://t1.kakaocdn.net/friends/prod/main_tab/feed/media/media_2_20220117160133.jpg',
-        'https://t1.kakaocdn.net/friends/prod/main_tab/feed/media/media_3_20220117160134.jpg',
-        'https://t1.kakaocdn.net/friends/prod/main_tab/feed/media/media_4_20220117160134.jpg',
-      ],
+      img: [require('@/assets/image/00_product00.jpg'), require('@/assets/image/00_product01.jpg')],
       reply: ['어쩌고', '저쩌고', '불라불라', '나나'],
       buy: [
         {
@@ -40,10 +35,10 @@ export const response = {
       title: '언제나 내 품에 쏙❤️ 프렌즈, 우리집으로 가자!',
       content: '선없는 충전이 필요하세요?➰🔋얼리어답터 춘식에게 맡겨주세요',
       img: [
-        'https://t1.kakaocdn.net/friends/prod/main_tab/feed/media/media_1_20220117160133.jpg',
-        'https://t1.kakaocdn.net/friends/prod/main_tab/feed/media/media_2_20220117160133.jpg',
-        'https://t1.kakaocdn.net/friends/prod/main_tab/feed/media/media_3_20220117160134.jpg',
-        'https://t1.kakaocdn.net/friends/prod/main_tab/feed/media/media_4_20220117160134.jpg',
+        require('@/assets/image/01_product00.jpg'),
+        require('@/assets/image/01_product01.jpg'),
+        require('@/assets/image/01_product02.jpg'),
+        require('@/assets/image/01_product03.jpg'),
       ],
       reply: ['어쩌고', '저쩌고', '불라불라', '나나'],
       buy: [],
@@ -56,9 +51,9 @@ export const response = {
       title: '죠르디, 공룡되다🦖 죠르디의 변신은 유죄',
       content: '죠르디 공룡이 집콕을 지켜쥬죨.🏠',
       img: [
-        'https://t1.kakaocdn.net/friends/new_store/prod/main_tab/feed/media/media_0_20211110180929.jpg',
-        'https://t1.kakaocdn.net/friends/new_store/prod/main_tab/feed/media/media_0_20211110180852.jpg',
-        'https://t1.kakaocdn.net/friends/new_store/prod/main_tab/feed/media/media_1_20211110180852.jpg',
+        require('@/assets/image/02_product00.jpg'),
+        require('@/assets/image/02_product01.jpg'),
+        require('@/assets/image/02_product02.jpg'),
       ],
       reply: ['어쩌고', '저쩌고', '불라불라', '나나'],
       buy: [],

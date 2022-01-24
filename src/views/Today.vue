@@ -1,13 +1,17 @@
 <template>
   <div>
-    <div><SlideWindow :picture="pictures" :imgWidth="640" />ddddd</div>
+    <div><SlideWindow :picture="pictures" :imgWidth="640" /></div>
     <Announce
       v-for="(e, i) in list"
       :key="i"
       :picture="e.img"
       :topImg="e.topImg"
+      :title="e.title"
       :name="e.name"
       :imgWidth="500"
+      :like="e.like"
+      :time="e.createTime"
+      :content="e.content"
     ></Announce>
   </div>
 </template>

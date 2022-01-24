@@ -48,6 +48,7 @@ export default defineComponent({
   padding-top: 10px;
   overflow: hidden;
   position: relative;
+  background-color: #fff;
   .side_show {
     width: 24px;
     height: 24px;

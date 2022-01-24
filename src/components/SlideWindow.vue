@@ -1,6 +1,6 @@
 <template>
   <div class="scene" :style="{ width: `${imgWidth}px` }">
-    <ul class="entire" ref="entire">
+    <ul class="entire" ref="entire" :style="{ width: `calc(${pictures.length}*100%)` }">
       <li
         class="picture"
         v-for="(e, i) in pictures"
@@ -13,6 +13,11 @@
     </ul>
     <div class="arrow left" @click="prev($event)">&lt;</div>
     <div class="arrow right" @click="next($event)">&gt;</div>
+    <div class="bar_wrap">
+      <ul class="bar_inner">
+        <li v-for="(e, i) in pictures" :key="i" :class="i === windowIndex ? 'active' : ''"></li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -26,6 +31,7 @@ export default defineComponent({
   setup(props) {
     const pictures = toRef(props, 'picture');
     const imgWidths = toRef(props, 'imgWidth');
+    const windowIndex = ref<number>(0);
     const imgs = ref<HTMLElement[]>([]);
     const controlSlide = ref<number>(0);
 
@@ -33,8 +39,14 @@ export default defineComponent({
       imgs.value.push(el);
     };
     const entire = ref<HTMLElement | null>(null);
-    const next = (e: Event) => {
-      console.log(e.target);
+    const next = () => {
+      windowIndex.value++;
+      if (props.picture) {
+        windowIndex.value < 0
+          ? (windowIndex.value = (windowIndex.value % props.picture.length) + props.picture.length)
+          : (windowIndex.value = windowIndex.value % props.picture.length);
+      }
+
       if (entire.value instanceof HTMLElement) {
         controlSlide.value--;
         if (props.imgWidth) {
@@ -52,6 +64,12 @@ export default defineComponent({
       }
     };
     const prev = () => {
+      windowIndex.value--;
+      if (props.picture) {
+        windowIndex.value < 0
+          ? (windowIndex.value = (windowIndex.value % props.picture.length) + props.picture.length)
+          : (windowIndex.value = windowIndex.value % props.picture.length);
+      }
       if (entire.value instanceof HTMLElement) {
         controlSlide.value++;
         if (props.imgWidth) {
@@ -84,6 +102,7 @@ export default defineComponent({
       prev,
       next,
       controlSlide,
+      windowIndex,
     };
   },
 });
@@ -105,6 +124,7 @@ export default defineComponent({
     position: absolute;
     transform: translateY(-50%);
     top: 50%;
+    cursor: pointer;
     &.left {
       left: 0;
     }
@@ -112,11 +132,34 @@ export default defineComponent({
       right: 0;
     }
   }
+  .bar_wrap {
+    display: flex;
+    justify-content: center;
+    .bar_inner {
+      margin: 0 auto;
+      display: flex;
+      // justify-content: space-evenly;
+      li {
+        height: 5px;
+        width: 5px;
+        margin-right: 5px;
+        border-radius: 5px;
+        background-color: lightgray;
+        &.active {
+          width: 15px;
+          background-color: #000;
+        }
+      }
+    }
+  }
 }
 .entire {
-  width: 300%;
-  height: 150px;
   transition: margin 0.5s ease;
+  &:after {
+    display: block;
+    clear: both;
+    content: '';
+  }
   li {
     width: 640px;
     height: 100%;

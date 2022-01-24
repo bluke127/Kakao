@@ -1,6 +1,6 @@
 <template>
   <div class="main_wrap">
-    <MainHeader></MainHeader>
+    <MainHeader class="header_wrap"></MainHeader>
     <main><slot></slot></main>
     <MainFooter></MainFooter>
   </div>
@@ -19,6 +19,12 @@ export default defineComponent({
 <style lang="scss">
 .main_wrap {
   width: 640px;
-  margin: 0 auto;
+  margin: 87px auto 0;
+  .header_wrap {
+    width: 640px;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+  }
 }
 </style>

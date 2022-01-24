@@ -4,11 +4,11 @@ module.exports = {
   },
   css: {
     loaderOptions: {
-      // sass: {
-      //   additionalData: `
-      //     @import "@/styles/variables.scss";
-      //   `,
-      // },
+      sass: {
+        additionalData: `
+          @import "@/styles/variables.scss";
+        `,
+      },
     },
   },
 };
