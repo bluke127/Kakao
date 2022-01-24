@@ -15,7 +15,7 @@
           <div>장바구니 내역</div>
           <div>주문 배송 내역</div>
         </li>
-        <li class="charac" @click="toggleArrow($event)">
+        <li class="charac">
           <div class="arrowDown" @click="toggleArrow($event)">캐릭터</div>
           <div class="arrowDown" @click="toggleArrow($event)">카테고리</div>
         </li>
@@ -66,6 +66,7 @@ export default defineComponent({
         e.target.className.indexOf('arrowDown') < 0
           ? ((toggleBefore = 'arrowUp'), (toggleAfter = 'arrowDown'))
           : ((toggleBefore = 'arrowDown'), (toggleAfter = 'arrowUp'));
+
         e.target.classList.replace(toggleBefore, toggleAfter);
       }
     };
@@ -129,6 +130,34 @@ export default defineComponent({
         font-size: 16px;
         line-height: 48px;
         border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        .arrowDown {
+          position: relative;
+          &::after {
+            content: '';
+            width: 15px;
+            height: 15px;
+            position: absolute;
+            right: 0;
+            top: 0;
+            background: url('~@/assets/icon/gather.png') 0 0 no-repeat;
+            background-size: 700px 600px;
+            background-position: $down-direction;
+          }
+        }
+        .arrowUp {
+          position: relative;
+          &::after {
+            content: '';
+            width: 15px;
+            height: 15px;
+            position: absolute;
+            right: 0;
+            top: 0;
+            background: url('~@/assets/icon/gather.png') 0 0 no-repeat;
+            background-size: 700px 600px;
+            background-position: $up-direction;
+          }
+        }
       }
     }
     .last_img {

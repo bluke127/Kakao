@@ -2,6 +2,7 @@ export const response = {
   list: [
     {
       name: '라이언',
+      topImg: require('@/assets/image/00_chac.png'),
       createTime: '2022년 01월 07일 23시 01분',
       like: 61,
       title: '데스크테리어 종결자',
@@ -33,6 +34,7 @@ export const response = {
     },
     {
       name: '어피치',
+      topImg: require('@/assets/image/01_chac.png'),
       createTime: '2022년 01월 17일 10시 01분',
       like: 49,
       title: '언제나 내 품에 쏙❤️ 프렌즈, 우리집으로 가자!',
@@ -48,6 +50,7 @@ export const response = {
     },
     {
       name: '조르디',
+      topImg: require('@/assets/image/02_chac.png'),
       createTime: '2022년 01월 19일 23시 01분',
       like: 3000,
       title: '죠르디, 공룡되다🦖 죠르디의 변신은 유죄',
@@ -103,3 +106,5 @@ export const response = {
     // },
   ],
 };
+export type responseType = typeof response;
+export type responseListType = typeof response.list;
