@@ -11,17 +11,17 @@ export const response = {
       reply: ['어쩌고', '저쩌고', '불라불라', '나나'],
       buy: [
         {
-          img: 'https://img1.kakaocdn.net/thumb/R140x140.q82/?fname=https%3A%2F%2Ft1.daumcdn.net%2Ffriends%2Fprod%2Fproduct%2F20220113105920635_8809814924661_8809814924661_AW_00.jpg',
+          img: require('@/assets/image/00_buy00.jpg'),
           title: '안고자는애착바디필로우_라이언',
           price: 20000,
         },
         {
-          img: 'https://img1.kakaocdn.net/thumb/R140x140.q82/?fname=https%3A%2F%2Ft1.daumcdn.net%2Ffriends%2Fprod%2Fproduct%2F20220113105712058_8809814924678_8809814924678_AW_00.jpg',
+          img: require('@/assets/image/00_buy01.jpg'),
           title: '안고자는애착바디필로우_어피치',
           price: 20000,
         },
         {
-          img: 'https://img1.kakaocdn.net/thumb/R140x140.q82/?fname=https%3A%2F%2Ft1.daumcdn.net%2Ffriends%2Fprod%2Fproduct%2F20220113104908003_8809814924685_8809814924685_AW_00.jpg',
+          img: require('@/assets/image/00_buy02.jpg'),
           title: '안고자는애착바디필로우_춘식',
           price: 20000,
         },

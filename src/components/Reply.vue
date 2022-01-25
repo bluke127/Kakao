@@ -1,18 +1,11 @@
 <template>
   <div>
+    <div class="store_wrap">
+      <p class="reply_count">댓글 {{ data.length }}개</p>
+      <div v-for="(e, i) in data" :key="i">{{ e }}</div>
+    </div>
     <div class="insert_wrap">
       <base-input class="reply_insert" :placeholder="placeholder" v-model="modelValue"></base-input>
-    </div>
-
-    <div class="store_wrap">
-      <base-input
-        v-for="(e, i) in data"
-        :key="i"
-        class="reply_insert"
-        :placeholder="placeholder"
-        :value="e"
-        :readonly="true"
-      ></base-input>
     </div>
   </div>
 </template>
@@ -48,6 +41,14 @@ export default defineComponent({
     line-height: 20px;
     background-color: transparent;
     resize: none;
+  }
+}
+.store_wrap {
+  line-height: 20px;
+  color: #909092;
+  div {
+    line-height: 40px;
+    font-size: 15px;
   }
 }
 </style>

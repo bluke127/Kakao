@@ -13,6 +13,7 @@
       :time="e.createTime"
       :content="e.content"
       :reply="e.reply"
+      :buy="e.buy"
     ></Announce>
   </div>
 </template>
