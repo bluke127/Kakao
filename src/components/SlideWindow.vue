@@ -15,7 +15,7 @@
     <div class="arrow right" @click="next($event)">&gt;</div>
     <div class="bar_wrap">
       <ul class="bar_inner">
-        <li v-for="(e, i) in pictures" :key="i" :class="i === windowIndex ? 'active' : ''"></li>
+        <li v-for="(item, index) in picture" :key="index"></li>
       </ul>
     </div>
   </div>
@@ -46,7 +46,7 @@ export default defineComponent({
           ? (windowIndex.value = (windowIndex.value % props.picture.length) + props.picture.length)
           : (windowIndex.value = windowIndex.value % props.picture.length);
       }
-
+      imgs.value.shift();
       if (entire.value instanceof HTMLElement) {
         controlSlide.value--;
         if (props.imgWidth) {
@@ -65,11 +65,13 @@ export default defineComponent({
     };
     const prev = () => {
       windowIndex.value--;
+      console.log(props.picture);
       if (props.picture) {
         windowIndex.value < 0
           ? (windowIndex.value = (windowIndex.value % props.picture.length) + props.picture.length)
           : (windowIndex.value = windowIndex.value % props.picture.length);
       }
+      imgs.value.pop();
       if (entire.value instanceof HTMLElement) {
         controlSlide.value++;
         if (props.imgWidth) {

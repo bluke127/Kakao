@@ -4,8 +4,8 @@
       :type="type"
       :placeholder="placeholder"
       :readonly="readonly"
-      @input="Vmodel"
-      v-model="value"
+      :value="modelValue"
+      @input="$emit('update:modelValue', $event.target.value)"
     />
   </div>
 </template>
@@ -17,14 +17,20 @@ export default defineComponent({
     type: { type: String, default: 'text' },
     placeholder: { type: String },
     readonly: { type: Boolean },
-    replyValue: { type: String },
+    modelValue: { type: String },
   },
-  setup(props, context) {
-    const value = toRef(props, 'replyValue');
-    const Vmodel = context.emit('input', value);
-    return { Vmodel, value };
+  setup(props) {
+    const value = toRef(props, 'modelValue');
+    return { value };
   },
 });
 </script>
 
-<style></style>
+<style lang="scss">
+input {
+  ::placeholder {
+    color: #434343;
+    font-weight: 900;
+  }
+}
+</style>
