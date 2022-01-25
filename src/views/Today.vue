@@ -12,6 +12,7 @@
       :like="e.like"
       :time="e.createTime"
       :content="e.content"
+      :reply="e.reply"
     ></Announce>
   </div>
 </template>

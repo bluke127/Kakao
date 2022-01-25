@@ -9,6 +9,7 @@
       :time="time"
     ></AnnounceImg>
     <AnnounceText :like="like" :title="title" :content="content"></AnnounceText>
+    <Reply v-if="reply" :data="reply"></Reply>
   </div>
 </template>
 
@@ -16,8 +17,9 @@
 import { defineComponent } from 'vue';
 import AnnounceImg from '@/components/AnnounceImg.vue';
 import AnnounceText from '@/components/AnnounceText.vue';
+import Reply from '@/components/Reply.vue';
 export default defineComponent({
-  components: { AnnounceImg, AnnounceText },
+  components: { AnnounceImg, AnnounceText, Reply },
   props: {
     topImg: { type: String },
     picture: { type: Array, default: () => ['가', '나', '다'] },
@@ -27,6 +29,7 @@ export default defineComponent({
     title: { type: String },
     like: { type: Number },
     content: { type: String },
+    reply: { type: Array },
   },
 });
 </script>

@@ -17,9 +17,10 @@
 
 <script lang="ts">
 import { defineComponent, toRef, ref } from 'vue';
+// import type { tabsCateType } from '@/layout/Header.vue';
 export default defineComponent({
   props: {
-    cate: { type: String },
+    cate: { type: Array },
   },
   setup(props) {
     const tabsCate = toRef(props, 'cate');

@@ -51,14 +51,12 @@ export default defineComponent({
     const closeSideMenu = () => {
       if (sideMenu.value) {
         sideMenu.value.style.marginLeft = '-400px';
-        // sideMenu.value.style.marginLeft = '0';
       }
       setTimeout(() => {
         store.state.menu.ShowSideMenuFlag = false;
       }, 500);
     };
     const toggleArrow = (e: Event) => {
-      // (e.target? as Element).removeClassName('arrowDown');
       if (e.target instanceof Element) {
         let toggleBefore: string;
         let toggleAfter: string;

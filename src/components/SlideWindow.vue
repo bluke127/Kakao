@@ -118,7 +118,7 @@ export default defineComponent({
 .scene {
   position: relative;
   overflow: hidden;
-  margin: 0 auto;
+  margin: 16px auto;
   .arrow {
     font-size: 24px;
     position: absolute;
@@ -136,7 +136,7 @@ export default defineComponent({
     display: flex;
     justify-content: center;
     .bar_inner {
-      margin: 0 auto;
+      margin: 16px auto 0;
       display: flex;
       // justify-content: space-evenly;
       li {
