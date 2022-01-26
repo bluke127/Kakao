@@ -16,8 +16,20 @@
           <div>주문 배송 내역</div>
         </li>
         <li class="charac">
-          <div class="arrowDown" @click="toggleArrow($event)">캐릭터</div>
-          <div class="arrowDown" @click="toggleArrow($event)">카테고리</div>
+          <div
+            class="arrowDown"
+            @click="toggleArrow('charac', 0)"
+            :class="arrow.charac[0] ? 'arrowDown' : 'arrowUp'"
+          >
+            캐릭터
+          </div>
+          <div
+            class="arrowDown"
+            @click="toggleArrow('charac', 1)"
+            :class="arrow.charac[1] ? 'arrowDown' : 'arrowUp'"
+          >
+            카테고리
+          </div>
         </li>
         <li class="notice">
           <div>공지사항</div>
@@ -52,23 +64,19 @@ export default defineComponent({
       if (sideMenu.value) {
         sideMenu.value.style.marginLeft = '-400px';
       }
+      const a: string | null = 'a';
+      console.log(a as string);
+      //trainsition 0.5를 기다리기 위해서 setTimeout
       setTimeout(() => {
-        store.state.menu.ShowSideMenuFlag = false;
+        store.dispatch('menu/SET_SIDEMENU', false);
       }, 500);
     };
-    const toggleArrow = (e: Event) => {
-      if (e.target instanceof Element) {
-        let toggleBefore: string;
-        let toggleAfter: string;
-        console.log(e.target.className);
-        e.target.className.indexOf('arrowDown') < 0
-          ? ((toggleBefore = 'arrowUp'), (toggleAfter = 'arrowDown'))
-          : ((toggleBefore = 'arrowDown'), (toggleAfter = 'arrowUp'));
-
-        e.target.classList.replace(toggleBefore, toggleAfter);
-      }
+    const arrow = ref<{ [key: string]: boolean[] }>({ charac: [true, true] });
+    const toggleArrow = (category: string, i: number) => {
+      console.log(category, arrow.value[category], i);
+      arrow.value[`${category}`][i] = !arrow.value[`${category}`][i];
     };
-    return { store, sideMenuFlag, sideMenu, closeSideMenu, toggleArrow };
+    return { store, sideMenuFlag, sideMenu, closeSideMenu, arrow, toggleArrow };
   },
 });
 </script>
@@ -137,7 +145,8 @@ export default defineComponent({
             height: 15px;
             position: absolute;
             right: 0;
-            top: 0;
+            top: 50%;
+            transform: translateY(-50%);
             background: url('~@/assets/icon/gather.png') 0 0 no-repeat;
             background-size: 700px 600px;
             background-position: $down-direction;
@@ -151,7 +160,8 @@ export default defineComponent({
             height: 15px;
             position: absolute;
             right: 0;
-            top: 0;
+            top: 50%;
+            transform: translateY(-50%);
             background: url('~@/assets/icon/gather.png') 0 0 no-repeat;
             background-size: 700px 600px;
             background-position: $up-direction;

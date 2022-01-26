@@ -2,13 +2,13 @@
   <div>
     <ul class="tabs">
       <li
-        v-for="(e, i) in tabsCate"
-        :key="i"
+        v-for="(category, index) in tabsCategory"
+        :key="index"
         class="tab"
-        :class="[e.index, borderBase === i ? 'getBorder' : '']"
-        @click="setBorder(i)"
+        :class="[category.index, borderBase === index ? 'getBorder' : '']"
+        @click="[setBorder(index), routerPush(category.routeName)]"
       >
-        {{ e.name }}
+        {{ category.name }}
       </li>
       <li class="hide_border" :style="{ left: `calc(25%*${borderBase})` }"></li>
     </ul>
@@ -16,19 +16,24 @@
 </template>
 
 <script lang="ts">
+import router from '@/router';
 import { defineComponent, toRef, ref } from 'vue';
-// import type { tabsCateType } from '@/layout/Header.vue';
 export default defineComponent({
   props: {
-    cate: { type: Array },
+    propsTabsCategory: { type: Array },
   },
   setup(props) {
-    const tabsCate = toRef(props, 'cate');
+    const tabsCategory = toRef(props, 'propsTabsCategory');
     const borderBase = ref<number>(0);
     const setBorder = (index: number) => {
       borderBase.value = index;
     };
-    return { tabsCate, setBorder, borderBase };
+    const routerPush = (name: string) => {
+      console.log(name);
+      router.push({ path: `/tabs/${name}` });
+    };
+
+    return { tabsCategory, setBorder, borderBase, routerPush };
   },
 });
 </script>

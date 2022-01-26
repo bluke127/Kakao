@@ -4,20 +4,20 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     component: () => import('@/views/MainPage.vue'),
-    redirect: '/today',
+    redirect: '/tabs/today',
     children: [
       {
-        path: '/today',
+        path: '/tabs/today',
         name: 'Today',
         component: () => import('@/views/Today.vue'),
       },
       {
-        path: '/fresh',
+        path: '/tabs/fresh',
         name: 'Fresh',
         component: () => import('@/views/Fresh.vue'),
       },
       {
-        path: '/popular',
+        path: '/tabs/popular',
         name: 'Popular',
         component: () => import('@/views/Popular.vue'),
       },

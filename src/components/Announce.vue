@@ -14,22 +14,26 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, PropType } from 'vue';
 import AnnounceImg from '@/components/AnnounceImg.vue';
 import AnnounceText from '@/components/AnnounceText.vue';
 import Reply from '@/components/Reply.vue';
 export default defineComponent({
   components: { AnnounceImg, AnnounceText, Reply },
   props: {
-    topImg: { type: String },
-    picture: { type: Array, default: () => ['가', '나', '다'] },
-    imgWidth: { type: Number },
-    name: { type: String },
-    time: { type: String },
-    title: { type: String },
-    like: { type: Number },
-    content: { type: String },
-    reply: { type: Array },
+    topImg: { type: String, required: true },
+    picture: { type: Array as PropType<string[]>, required: true },
+    imgWidth: { type: Number, required: true, default: 640 },
+    name: { type: String, required: true },
+    time: { type: String, required: true },
+    title: { type: String, required: true },
+    like: { type: Number, required: true, default: 0 },
+    content: { type: String, required: true },
+    reply: {
+      type: Array as PropType<string[]>,
+      required: false,
+      default: () => [],
+    },
   },
 });
 </script>

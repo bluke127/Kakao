@@ -1,7 +1,11 @@
 <template>
   <div>
     <div class="insert_wrap">
-      <base-input class="reply_insert" :placeholder="placeholder" v-model="modelValue"></base-input>
+      <base-input
+        class="reply_insert"
+        :placeholder="placeholder"
+        v-model="modelValue"
+      ></base-input>
     </div>
 
     <div class="store_wrap">

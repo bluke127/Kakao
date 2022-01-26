@@ -14,10 +14,10 @@
 import { defineComponent, toRef } from 'vue';
 export default defineComponent({
   props: {
-    type: { type: String, default: 'text' },
-    placeholder: { type: String },
+    type: { type: String, default: 'text', required: false },
+    placeholder: { type: String, required: false, default: '' },
     readonly: { type: Boolean },
-    modelValue: { type: String },
+    modelValue: { type: String, required: true, default: '' },
   },
   setup(props) {
     const value = toRef(props, 'modelValue');
