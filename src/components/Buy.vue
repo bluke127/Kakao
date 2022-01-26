@@ -19,7 +19,6 @@ export default defineComponent({
   props: {
     buy: { type: Array },
   },
-  setup() {},
 });
 </script>
 

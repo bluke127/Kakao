@@ -5,11 +5,7 @@
       <div v-for="(e, i) in data" :key="i">{{ e }}</div>
     </div>
     <div class="insert_wrap">
-      <base-input
-        class="reply_insert"
-        :placeholder="placeholder"
-        v-model="modelValue"
-      ></base-input>
+      <base-input class="reply_insert" :placeholder="placeholder" v-model="modelValue"></base-input>
     </div>
   </div>
 </template>

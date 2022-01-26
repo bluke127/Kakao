@@ -2,7 +2,9 @@
   <div class="side_menu_wrap" @click.self="closeSideMenu">
     <div class="side_menu" ref="sideMenu">
       <div class="go_login">
-        <div class="need_login"><span>로그인이</span> 필요해요!</div>
+        <router-link to="/login" tag="div" class="need_login"
+          ><span>로그인이</span> 필요해요!</router-link
+        >
         <div>비회원 주문조회</div>
       </div>
       <div class="img">
@@ -113,7 +115,9 @@ export default defineComponent({
       font-size: 14px;
       .need_login {
         font-size: 20px;
+        cursor: pointer;
         font-weight: 900;
+        color: #000;
       }
     }
     .img {

@@ -14,12 +14,12 @@ export type Mutations = typeof mutations;
 type MyActionContext = {
   commit<K extends keyof Mutations>(
     key: K,
-    payload?: Parameters<Mutations[K]>[1]
+    payload?: Parameters<Mutations[K]>[1],
   ): ReturnType<Mutations[K]>;
-} & Omit<ActionContext<RootState, RootState>, "commit">;
+} & Omit<ActionContext<RootState, RootState>, 'commit'>;
 
 const actions = {
-  SET_SIDEMENU(context: MyActionContext, flag: boolean) {
+  SET_SIDEMENU(context: MyActionContext, flag: boolean): void {
     context.commit('SET_SIDEMENU', flag);
   },
 };

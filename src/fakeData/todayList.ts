@@ -55,7 +55,7 @@ export const response = {
         require('@/assets/image/02_product01.jpg'),
         require('@/assets/image/02_product02.jpg'),
       ],
-      reply: ['어쩌고', '저쩌고', '불라불라', '나나'],
+      reply: ['어쩌고', '저쩌고', '호호호호호ㅗ로롤', '나나'],
       buy: [],
     },
     // {
