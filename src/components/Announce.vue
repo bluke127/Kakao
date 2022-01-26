@@ -9,6 +9,7 @@
       :time="time"
     ></AnnounceImg>
     <AnnounceText :like="like" :title="title" :content="content"></AnnounceText>
+    <Buy :buy="buy" v-if="buy"></Buy>
     <Reply v-if="reply" :data="reply"></Reply>
   </div>
 </template>
@@ -17,9 +18,10 @@
 import { defineComponent, PropType } from 'vue';
 import AnnounceImg from '@/components/AnnounceImg.vue';
 import AnnounceText from '@/components/AnnounceText.vue';
+import Buy from '@/components/Buy.vue';
 import Reply from '@/components/Reply.vue';
 export default defineComponent({
-  components: { AnnounceImg, AnnounceText, Reply },
+  components: { AnnounceImg, AnnounceText, Buy, Reply },
   props: {
     topImg: { type: String, required: true },
     picture: { type: Array as PropType<string[]>, required: true },
@@ -34,6 +36,7 @@ export default defineComponent({
       required: false,
       default: () => [],
     },
+    buy: { type: Array },
   },
 });
 </script>

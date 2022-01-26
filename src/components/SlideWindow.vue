@@ -15,7 +15,11 @@
     <div class="arrow right" @click="next($event)">&gt;</div>
     <div class="bar_wrap">
       <ul class="bar_inner">
-        <li v-for="(item, index) in picture" :key="index"></li>
+        <li
+          v-for="(item, index) in pictures"
+          :key="index"
+          :class="{ active: windowIndex === index }"
+        ></li>
       </ul>
     </div>
   </div>
@@ -40,13 +44,6 @@ export default defineComponent({
     };
     const entire = ref<HTMLElement | null>(null);
     const next = () => {
-      windowIndex.value++;
-      if (props.picture) {
-        windowIndex.value < 0
-          ? (windowIndex.value = (windowIndex.value % props.picture.length) + props.picture.length)
-          : (windowIndex.value = windowIndex.value % props.picture.length);
-      }
-      imgs.value.shift();
       if (entire.value instanceof HTMLElement) {
         controlSlide.value--;
         if (props.imgWidth) {
@@ -62,16 +59,26 @@ export default defineComponent({
           console.log(imgs.value[0]);
         }
       }
+      nextIndex();
     };
-    const prev = () => {
+    const nextIndex = () => {
+      windowIndex.value++;
+      if (pictures.value) {
+        windowIndex.value < 0
+          ? (windowIndex.value =
+              (windowIndex.value % pictures?.value.length) + pictures?.value.length)
+          : (windowIndex.value = windowIndex.value % pictures?.value.length);
+      }
+    };
+    const prevIndex = () => {
       windowIndex.value--;
-      console.log(props.picture);
       if (props.picture) {
         windowIndex.value < 0
           ? (windowIndex.value = (windowIndex.value % props.picture.length) + props.picture.length)
           : (windowIndex.value = windowIndex.value % props.picture.length);
       }
-      imgs.value.pop();
+    };
+    const prev = () => {
       if (entire.value instanceof HTMLElement) {
         controlSlide.value++;
         if (props.imgWidth) {
@@ -85,6 +92,7 @@ export default defineComponent({
         entire.value?.prepend(imgs.value[imgs.value.length - 1]);
         imgs.value.unshift(imgs.value[imgs.value.length - 1]);
         imgs.value.pop();
+        prevIndex();
       }
     };
     onMounted(() => {
@@ -100,6 +108,8 @@ export default defineComponent({
       imgWidths,
       imgs,
       imgsPush,
+      prevIndex,
+      nextIndex,
       entire,
       prev,
       next,
