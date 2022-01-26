@@ -3,8 +3,13 @@
     <div class="login">
       <h1></h1>
       <BaseInput :placeholder="'카카오메일 아이디, 이메일, 전화번호'"></BaseInput>
-      <BaseInput :placeholder="'비밀번호'"></BaseInput>
-      <BaseButton :style="buttonStyle"></BaseButton>
+      <BaseInput :placeholder="'비밀번호'" @click="a"></BaseInput>
+      <div>
+        <BaseButton :style="buttonStyle" @click="autoCheck"></BaseButton
+        ><span>로그인 상태 유지</span>
+      </div>
+      <BaseButton :style="loginButtonStyle"><template v-slot:msg>로그인</template></BaseButton>
+      <BaseButton :style="QRButtonStyle"><template v-slot:msg>QR인증</template></BaseButton>
     </div>
     <MainFooter></MainFooter>
   </div>
@@ -14,28 +19,35 @@
 import MainFooter from '@/components/Footer.vue';
 import BaseInput from '@/components/BaseInput.vue';
 import BaseButton from '@/components/BaseButton.vue';
-import { defineComponent, reactive, ref, onMounted } from 'vue';
+import { defineComponent, reactive, ref } from 'vue';
 type buttonStyleType = {
-  background: string;
+  backgroundImage?: string;
   backgroundPosition?: string;
+  backgroundColor?: string;
+  textAlign?: string;
+  fontSize?: string;
   width: string;
   height: string;
 };
 export type { buttonStyleType };
 export default defineComponent({
   components: { MainFooter, BaseInput, BaseButton },
-
   setup() {
+    /* eslint @typescript-eslint/no-var-requires: "off" */
+    const buttonBackgroundImg = ref<string>(require('@/assets/logo/logo_gather.png'));
     const buttonStyle = reactive<buttonStyleType>({
-      background: '',
+      backgroundImage: `url('${buttonBackgroundImg.value}')`,
+      backgroundPosition: '-30px -30px',
       width: '20px',
       height: '20px',
     });
-    const buttonBackgroundImg = ref<string>('~@/assets/logo/logo_gather.png');
-    onMounted(() => {
-      buttonStyle.background = url(`${buttonBackgroundImg.value}`);
-    });
-    return { buttonStyle, buttonBackgroundImg };
+
+    const autoCheck = () => {
+      buttonStyle.backgroundPosition === '0 -30px'
+        ? (buttonStyle.backgroundPosition = '-30px -30px')
+        : (buttonStyle.backgroundPosition = '0 -30px');
+    };
+    return { buttonStyle, buttonBackgroundImg, autoCheck };
   },
 });
 </script>
