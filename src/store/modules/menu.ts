@@ -1,16 +1,16 @@
-import Vuex, { StoreOptions, ActionContext } from 'vuex';
+import { ActionContext, ActionTree } from 'vuex';
 
 const state = {
   ShowSideMenuFlag: false,
 };
-export type RootState = typeof state;
+type RootState = typeof state;
 
 const mutations = {
-  SET_SIDEMENU(state: RootState, flag: boolean) {
+  SET_SIDEMENU(state: RootState, flag: boolean): void {
     state.ShowSideMenuFlag = flag;
   },
 };
-export type Mutations = typeof mutations;
+type Mutations = typeof mutations;
 type MyActionContext = {
   commit<K extends keyof Mutations>(
     key: K,
@@ -18,15 +18,18 @@ type MyActionContext = {
   ): ReturnType<Mutations[K]>;
 } & Omit<ActionContext<RootState, RootState>, 'commit'>;
 
+export enum ActionTypes {
+  SET_SIDEMENU = 'SET_SIDEMENU',
+}
 const actions = {
-  SET_SIDEMENU(context: MyActionContext, flag: boolean): void {
+  [ActionTypes.SET_SIDEMENU](context: any, flag: boolean): void {
     context.commit('SET_SIDEMENU', flag);
   },
 };
 
 export const menu = {
   namespaced: true,
+  actions,
   mutations,
   state,
-  actions,
 };

@@ -2,9 +2,12 @@
   <div class="side_menu_wrap" @click.self="closeSideMenu">
     <div class="side_menu" ref="sideMenu">
       <div class="go_login">
-        <router-link to="/login" tag="div" class="need_login"
+        <router-link to="/login" tag="div" class="need_login" v-if="!userEmail"
           ><span>로그인이</span> 필요해요!</router-link
         >
+        <div v-else-if="userEmail" class="need_login">
+          {{ userEmail.replace('@kakao.com', '') }}
+        </div>
         <div>비회원 주문조회</div>
       </div>
       <div class="img">
@@ -53,7 +56,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref } from 'vue';
+import { defineComponent, computed, ref, onMounted } from 'vue';
 import { useStore } from 'vuex';
 export default defineComponent({
   setup() {
@@ -62,6 +65,7 @@ export default defineComponent({
     const sideMenuFlag = computed(() => {
       return store.state.menu.ShowSideMenuFlag;
     });
+    const userEmail = ref<string>('');
     const closeSideMenu = () => {
       if (sideMenu.value) {
         sideMenu.value.style.marginLeft = '-400px';
@@ -78,7 +82,12 @@ export default defineComponent({
       console.log(category, arrow.value[category], i);
       arrow.value[`${category}`][i] = !arrow.value[`${category}`][i];
     };
-    return { store, sideMenuFlag, sideMenu, closeSideMenu, arrow, toggleArrow };
+    onMounted(() => {
+      if (store.state.user.email) {
+        userEmail.value = store.state.user.email;
+      }
+    });
+    return { store, sideMenuFlag, sideMenu, closeSideMenu, arrow, toggleArrow, userEmail };
   },
 });
 </script>
