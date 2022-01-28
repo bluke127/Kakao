@@ -141,16 +141,19 @@ export default defineComponent({
 
     const autoCheck = () => {
       if (buttonStyle.backgroundPosition === '0 -30px') {
-        store.dispatch('user/SET_AUTO_LOGIN', true);
+        store.dispatch('user/SET_AUTO_LOGIN', false);
         buttonStyle.backgroundPosition = '-30px -30px';
       } else {
-        store.dispatch('user/SET_AUTO_LOGIN', false);
+        store.dispatch('user/SET_AUTO_LOGIN', true);
         buttonStyle.backgroundPosition = '0 -30px';
       }
     };
     onMounted(() => {
       if (store.state.user.email) {
-        router.push({ path: '/' });
+        idValue.value = store.state.user.email.replace('@kakao.com', '');
+        if (store.state.user.autoLogin) {
+          router.push({ path: '/' });
+        }
       }
     });
     return {

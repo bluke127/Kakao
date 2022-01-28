@@ -1,10 +1,14 @@
 import { createStore } from 'vuex';
-import { menu } from './modules/menu';
-import { user } from './modules/user';
+import { menu, menuRootState } from './modules/menu';
+import { user, UserRootState } from './modules/user';
 
+export interface RootState {
+  menu: menuRootState;
+  user: UserRootState;
+}
 export default createStore({
   modules: {
-    menu: menu,
-    user: user,
+    menu,
+    user,
   },
 });
