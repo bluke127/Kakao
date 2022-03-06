@@ -1,7 +1,7 @@
 import { Module, ActionContext, ActionTree } from 'vuex';
 import { RootState } from '../index';
 
-const state = {
+const state: { email: string; password: string; autoLogin: boolean } = {
   email: '',
   password: '',
   autoLogin: false,
