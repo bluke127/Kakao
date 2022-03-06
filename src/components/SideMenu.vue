@@ -20,11 +20,14 @@
         <li class="list">
           <div>
             장바구니 내역
-            <ul class="shoping_list">
-              <li v-for="(item, index) in buylist" :key="index">
-                {{ item.title }}
+            <transition-group tag="ul" class="shoping_list" name="slide-in">
+              <li v-for="(item, index) in buylist" :key="index" class="shoping_list_inner">
+                <span>
+                  {{ item.title }}
+                  <i class="delete_shopinglist" @click="deleteShopinglist(index)">x</i>
+                </span>
               </li>
-            </ul>
+            </transition-group>
           </div>
           <div>주문 배송 내역</div>
         </li>
@@ -81,11 +84,13 @@ export default defineComponent({
         sideMenu.value.style.marginLeft = '-400px';
       }
       const a: string | null = 'a';
-      console.log(a as string);
       //trainsition 0.5를 기다리기 위해서 setTimeout
       setTimeout(() => {
         store.dispatch('menu/SET_SIDEMENU', false);
       }, 500);
+    };
+    const deleteShopinglist = (index: number) => {
+      store.dispatch('shoping/DELETE_SHOPINGLIST', index);
     };
     const arrow = ref<{ [key: string]: boolean[] }>({ charac: [true, true] });
     const toggleArrow = (category: string, i: number) => {
@@ -97,7 +102,17 @@ export default defineComponent({
         userEmail.value = store.state.user.email;
       }
     });
-    return { store, sideMenuFlag, sideMenu, buylist, closeSideMenu, arrow, toggleArrow, userEmail };
+    return {
+      store,
+      sideMenuFlag,
+      sideMenu,
+      buylist,
+      deleteShopinglist,
+      closeSideMenu,
+      arrow,
+      toggleArrow,
+      userEmail,
+    };
   },
 });
 </script>
@@ -150,6 +165,7 @@ export default defineComponent({
     .list,
     .charac,
     .notice {
+      overflow: hidden;
       ::last-child {
         border-bottom: 1px solid rgba(0, 0, 0, 0.2);
       }
@@ -160,6 +176,23 @@ export default defineComponent({
         font-size: 16px;
         line-height: 48px;
         border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        &.shoping_list_inner {
+          height: 48px;
+          text-indent: 16px;
+          overflow: hidden;
+          border: none;
+          padding: 0;
+          span {
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+
+            .delete_shopinglist {
+              color: red;
+              cursor: pointer;
+            }
+          }
+        }
         .arrowDown {
           position: relative;
           &::after {
@@ -204,4 +237,23 @@ export default defineComponent({
     }
   }
 }
+
+.slide-in-enter-active,
+.slide-in-leave-active {
+  transition: all 1s ease-in-out;
+  overflow: hidden;
+}
+
+.slide-in-enter-from {
+  transform: translateX(-100%);
+}
+.slide-in-leave-to {
+  transform: translateX(100%);
+}
+// .slide-in-enter-to {
+//   transform: translateX(0);
+// }
+// .slide-in-leave-from {
+//   transform: translateX(0);
+// }
 </style>

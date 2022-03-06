@@ -1,39 +1,30 @@
 <template>
   <div class="header">
     <div class="header_top">
-      <div class="side_show" @click="ShowSideMenuFlag"></div>
+      <div class="side_show" @click="$emit('setSideFlag')"></div>
       <h1>
         <img :src="require('@/assets/image/logo_kakaofriends.png')" alt="" />
       </h1>
     </div>
     <Tabs :propsTabsCategory="tabsCategory"></Tabs>
-    <SideMenu v-if="sideFlag"></SideMenu>
   </div>
 </template>
 
 <script lang="ts">
-import SideMenu from '@/components/SideMenu.vue';
 import Tabs from '@/components/Tabs.vue';
-import { useStore } from 'vuex';
-import { computed, defineComponent, ref } from 'vue';
+
+import { defineComponent, ref } from 'vue';
 export type tabsCateType = { name: string; index: string; routeName?: string };
 export default defineComponent({
-  components: { Tabs, SideMenu },
+  components: { Tabs },
   setup() {
-    const store = useStore();
-    const sideFlag = computed(() => {
-      return store.state.menu.ShowSideMenuFlag;
-    });
     const tabsCategory = ref<tabsCateType[]>([
       { name: '오늘', index: 'first', routeName: 'today' },
       { name: '신규', index: 'second', routeName: 'fresh' },
       { name: '인기', index: 'third', routeName: 'popular' },
       { name: '마이', index: 'fourth' },
     ]);
-    const ShowSideMenuFlag = () => {
-      store.dispatch('menu/SET_SIDEMENU', true);
-    };
-    return { ShowSideMenuFlag, tabsCategory, sideFlag };
+    return { tabsCategory };
   },
 });
 </script>
