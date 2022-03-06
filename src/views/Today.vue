@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div><SlideWindow :picture="pictures" :imgWidth="640" /></div>
+    <div><Carousel :slides="pictures" :imgWidth="640" /></div>
     <Announce
       v-for="(e, i) in list"
       :key="i"
@@ -20,13 +20,14 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, ref } from 'vue';
-import SlideWindow from '@/components/SlideWindow.vue';
+import Carousel from '@/components/Carousel/Carousel.vue';
 import Announce from '@/components/Announce.vue';
 import { response } from '@/fakeData/todayList';
 import type { responseListType } from '@/fakeData/todayList';
 export default defineComponent({
-  components: { SlideWindow, Announce },
+  components: { Announce, Carousel },
   setup() {
+    const change = ref(1);
     const pictures = [
       require('@/assets/image/00_chac.png'),
       require('@/assets/image/01_chac.png'),
@@ -38,7 +39,7 @@ export default defineComponent({
       // list.value?.push(...response.list);
       // console.log(list.value);
     });
-    return { list, pictures };
+    return { list, pictures, change };
   },
 });
 </script>

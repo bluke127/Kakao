@@ -2,9 +2,11 @@
   <button class="carousel-control left" @click="$emit('prev')">Prev</button>
   <button class="carousel-control right" @click="$emit('next')">Next</button>
 </template>
-
-<script>
-export default {};
+<script lang="ts">
+import { defineComponent, toRef, ref, onMounted } from 'vue';
+export default defineComponent({
+  emits: ['next', 'prev'],
+});
 </script>
 
 <style lang="scss" scoped>
