@@ -31,14 +31,22 @@
         ><span class="auto_check_text">로그인 상태 유지</span>
       </div>
       <div class="btn_wrap">
-        <BaseButton :style="loginButtonStyle" @click="login"
-          ><template v-slot:msg>로그인</template></BaseButton
-        >
+        <BaseButton :style="loginButtonStyle" @click="login">로그인</BaseButton>
         <span class="line"><span class="line_in">또는</span></span>
-        <BaseButton :style="QRButtonStyle"><template v-slot:msg>QR인증</template></BaseButton>
+        <BaseButton :style="QRButtonStyle" class="hover">QR인증</BaseButton>
       </div>
     </div>
     <MainFooter></MainFooter>
+    <DefaultPopup
+      v-if="popupFlag"
+      v-bind="$attrs"
+      :top="popupTop"
+      :body="popupBody"
+      :confirmMsg="confirmMsg"
+      :cancelMsg="cancelMsg"
+      @confirm="confirm"
+      @close="close"
+    ></DefaultPopup>
   </div>
 </template>
 
@@ -46,28 +54,20 @@
 import MainFooter from '@/components/Footer.vue';
 import BaseInput from '@/components/BaseInput.vue';
 import BaseButton from '@/components/BaseButton.vue';
-import { defineComponent, reactive, ref, onMounted } from 'vue';
+import DefaultPopup from '@/components/Popup/DefaultPopup.vue';
+// import { checkEmail } from '@/util/validation/index';
+import { defineComponent, reactive, ref, onMounted, computed, CSSProperties } from 'vue';
 import { useStore } from 'vuex';
 import { loginApi } from '@/api/index';
 import router from '@/router';
-type buttonStyleType = {
-  backgroundImage?: string;
-  backgroundPosition?: string;
-  backgroundColor?: string;
-  color?: string;
-  textAlign?: string;
-  fontSize?: string;
-  lineHeight?: string;
-  className?: string;
-  borderRadius?: string;
-  width: string;
-  height: string;
-};
-export type { buttonStyleType };
+type buttonStyleType = CSSProperties;
 export default defineComponent({
-  components: { MainFooter, BaseInput, BaseButton },
+  components: { MainFooter, BaseInput, BaseButton, DefaultPopup },
   setup() {
     const store = useStore();
+    const popupTop = ref<string>('');
+    const popupBody = ref<string>('');
+    const passFlag = ref<boolean>(false);
     /* eslint @typescript-eslint/no-var-requires: "off" */
     const buttonBackgroundImg = ref<string>(require('@/assets/logo/logo_gather.png'));
     const buttonStyle = reactive<buttonStyleType>({
@@ -95,17 +95,52 @@ export default defineComponent({
       color: '#000',
       width: '100%',
       height: '50px',
-      className: 'hover',
     });
     const login = () => {
       if (!idValue.value || !passwordValue.value) {
+        popupTop.value = '경고';
+        !idValue.value
+          ? (popupBody.value = '아이디를 입력해주시요')
+          : (popupBody.value = '비밀번호를 입력해주세요');
+        confirm;
+        setupPop(true);
+        passFlag.value = false;
         return;
       }
-      const info = { email: idValue.value, password: passwordValue.value };
-      loginApi.FETCH_LOGIN(info);
-      store.dispatch('user/SET_EMAIL', `${idValue.value}@kakao.com`);
-      router.push({ path: '/' });
+      // if (!validationEmail.value) {
+      //   popupTop.value = '경고';
+      //   popupBody.value = '이메일 형식에 맞지 않습니다';
+      //   setupPop(true);
+      //   passFlag.value = false;
+      //   return;
+      // }
+      popupTop.value = '알림';
+      popupBody.value = '로그인 되었습니다';
+      passFlag.value = true;
+      setupPop(true);
     };
+    const setupPop = (flag: boolean) => {
+      store.dispatch('popup/SET_POPUP', flag);
+    };
+    const confirm = () => {
+      if (passFlag.value === false) {
+        close();
+      } else {
+        const info = { email: idValue.value as string, password: passwordValue.value as string };
+        loginApi.FETCH_LOGIN(info);
+        store.dispatch('user/SET_EMAIL', `${idValue.value}@kakao.com`);
+        router.push({ path: '/' });
+      }
+    };
+    const close = () => {
+      setupPop(false);
+    };
+    const confirmMsg = ref<string>('확인');
+    const cancelMsg = ref<string>('취소');
+
+    const popupFlag = computed(() => {
+      return store.state.popup.ShowPopup;
+    });
     const setIdLabelFlag = ref<null | string>(null);
     const passwordValue = ref<null | string>(null);
     const idValue = ref<null | string>(null);
@@ -150,6 +185,7 @@ export default defineComponent({
         buttonStyle.backgroundPosition = '0 -30px';
       }
     };
+    // const validationEmail = computed(() => checkEmail(idValue.value as string));
     onMounted(() => {
       if (store.state.user.email) {
         idValue.value = store.state.user.email.replace('@kakao.com', '');
@@ -165,6 +201,7 @@ export default defineComponent({
       autoCheck,
       passwordValue,
       login,
+      // validationEmail,
       loginButtonStyle,
       QRButtonStyle,
       setIdLabelFlag,
@@ -176,6 +213,15 @@ export default defineComponent({
       idDelete,
       setIdValueBtn,
       labelClick,
+      popupTop,
+      popupBody,
+      setupPop,
+      passFlag,
+      confirm,
+      close,
+      confirmMsg,
+      cancelMsg,
+      popupFlag,
     };
   },
 });

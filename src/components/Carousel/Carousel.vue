@@ -47,6 +47,9 @@ export default defineComponent({
     };
     const prev = () => {
       transitionName.value = 'slide-in';
+      if (!props.slides) {
+        return;
+      }
       const index = currentSlide.value > 0 ? currentSlide.value - 1 : props.slides.length - 1;
       setCurrentSlide(index);
     };

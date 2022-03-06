@@ -1,17 +1,17 @@
 <template>
   <!-- <div class="button"> -->
-  <button :style="style" :class="style.className ?? style.className">
-    <slot name="msg"></slot>
+  <button v-bind="$attrs" :style="style">
+    <slot></slot>
   </button>
   <!-- </div> -->
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
-import { buttonStyleType } from '@/views/Login.vue';
+import { defineComponent, PropType, CSSProperties } from 'vue';
 export default defineComponent({
+  inheritAttrs: false,
   props: {
-    style: { type: Object as PropType<buttonStyleType>, required: true },
+    style: { type: Object as PropType<CSSProperties>, required: false },
   },
 });
 </script>

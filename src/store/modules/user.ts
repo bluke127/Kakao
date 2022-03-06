@@ -6,16 +6,16 @@ const state: { email: string; password: string; autoLogin: boolean } = {
   password: '',
   autoLogin: false,
 };
-export type UserRootState = typeof state;
+export type userRootState = typeof state;
 
 const mutations = {
-  SET_EMAIL(state: UserRootState, payload: string): void {
+  SET_EMAIL(state: userRootState, payload: string): void {
     state.email = payload;
   },
-  SET_PASSWORD(state: UserRootState, payload: string): void {
+  SET_PASSWORD(state: userRootState, payload: string): void {
     state.password = payload;
   },
-  SET_AUTO_LOGIN(state: UserRootState, payload: boolean): void {
+  SET_AUTO_LOGIN(state: userRootState, payload: boolean): void {
     state.autoLogin = payload;
   },
 };
@@ -25,14 +25,14 @@ type UserActionContext = {
     key: K,
     payload?: Parameters<UserMutations[K]>[1],
   ): ReturnType<UserMutations[K]>;
-} & Omit<ActionContext<UserRootState, RootState>, 'commit'>;
+} & Omit<ActionContext<userRootState, RootState>, 'commit'>;
 
 export enum ActionTypes {
   SET_EMAIL = 'SET_EMAIL',
   SET_PASSWORD = 'SET_PASSWORD',
   SET_AUTO_LOGIN = 'SET_AUTO_LOGIN',
 }
-const actions: ActionTree<UserRootState, RootState> = {
+const actions: ActionTree<userRootState, RootState> = {
   [ActionTypes.SET_EMAIL](context: UserActionContext, payload: string): void {
     context.commit('SET_EMAIL', payload);
   },
@@ -44,7 +44,7 @@ const actions: ActionTree<UserRootState, RootState> = {
   },
 };
 
-export const user: Module<UserRootState, RootState> = {
+export const user: Module<userRootState, RootState> = {
   namespaced: true,
   actions,
   mutations,
