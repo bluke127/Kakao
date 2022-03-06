@@ -22,12 +22,12 @@
         ></CarouselItem>
         <CarouselControls @prev="prev" @next="next" />
       </div>
-      <CarouselBar :slides="slides" :current-slide="currentSlide" />
+      <CarouselBar @moveCarousel="moveCarousel" :slides="slides" :current-slide="currentSlide" />
     </div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent, onMounted, onBeforeMount, defineAsyncComponent, ref } from 'vue';
 import CarouselItem from '@/components/Carousel/CarouselItem.vue';
 import CarouselControls from '@/components/Carousel/CarouselControls.vue';
@@ -41,8 +41,8 @@ export default defineComponent({
   },
   setup(props) {
     const transitionName = ref('slide-in');
-    const currentSlide = ref(0);
-    const setCurrentSlide = index => {
+    const currentSlide = ref<number>(0);
+    const setCurrentSlide = (index: number) => {
       currentSlide.value = index;
     };
     const prev = () => {
@@ -53,22 +53,27 @@ export default defineComponent({
 
     const next = () => {
       transitionName.value = 'slide-out';
+      if (!props.slides) {
+        return;
+      }
       const index = currentSlide.value < props.slides.length - 1 ? currentSlide.value + 1 : 0;
       setCurrentSlide(index);
     };
-    // let slideInterval;
-    onMounted(() => {
-      // slideInterval = setInterval(() => {
-      //   if (!props.slides) return;
-      //   const index = currentSlide.value < props.slides.length - 1 ? currentSlide.value + 1 : 0;
-      //   setCurrentSlide(index);
-      //   console.log(index);
-      // }, 5000);
-    });
-    onBeforeMount(() => {
-      // clearInterval(slideInterval);
-    });
-    return { currentSlide, next, prev, transitionName };
+    const moveCarousel = (toIndex: number) => {
+      if (currentSlide.value < toIndex) {
+        next();
+      } else if (currentSlide.value > toIndex) {
+        prev();
+      } else if (currentSlide.value === toIndex) {
+        return;
+      }
+      if (Math.abs(toIndex) - Math.abs(currentSlide.value) > 1) {
+        setTimeout(() => {
+          moveCarousel(toIndex);
+        }, 500);
+      }
+    };
+    return { currentSlide, next, prev, moveCarousel, transitionName };
   },
 });
 </script>
@@ -101,6 +106,11 @@ export default defineComponent({
 }
 .slide-in-enter-active,
 .slide-in-leave-active {
+  transition: all 1s ease-in-out;
+}
+
+.slide-in-enter,
+.slide-in-leave {
   transition: all 1s ease-in-out;
 }
 .slide-in-enter-from {

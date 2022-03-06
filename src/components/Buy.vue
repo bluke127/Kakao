@@ -60,6 +60,7 @@ export default defineComponent({
     border-radius: 10px;
     display: flex;
     padding: 4px 0 4px 7px;
+    cursor: pointer;
     .buy_img {
       width: 80px;
       img {
