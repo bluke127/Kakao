@@ -4,10 +4,10 @@ import { RootState } from '../index';
 const state: { shopinglist: { [key: string]: string }[] } = {
   shopinglist: [],
 };
-export type shopingListRootState = typeof state;
+export type shopingRootState = typeof state;
 
 const mutations = {
-  SET_SHOPINGLIST(state: shopingListRootState, item: { [key: string]: string }): void {
+  SET_SHOPINGLIST(state: shopingRootState, item: { [key: string]: string }): void {
     state.shopinglist.push(item);
   },
 };
@@ -17,18 +17,18 @@ type MyActionContext = {
     key: K,
     payload?: Parameters<Mutations[K]>[1],
   ): ReturnType<Mutations[K]>;
-} & Omit<ActionContext<shopingListRootState, RootState>, 'commit'>;
+} & Omit<ActionContext<shopingRootState, RootState>, 'commit'>;
 
 export enum ActionTypes {
   SET_SHOPINGLIST = 'SET_SHOPINGLIST',
 }
-const actions: ActionTree<shopingListRootState, RootState> = {
+const actions: ActionTree<shopingRootState, RootState> = {
   [ActionTypes.SET_SHOPINGLIST](context: MyActionContext, item): void {
     context.commit('SET_SHOPINGLIST', item);
   },
 };
 
-export const shopinglist: Module<shopingListRootState, RootState> = {
+export const shoping: Module<shopingRootState, RootState> = {
   namespaced: true,
   actions,
   mutations,

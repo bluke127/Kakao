@@ -56,7 +56,6 @@ export default defineComponent({
           }px)`;
           imgs.value.push(imgs.value[0]);
           imgs.value.shift();
-          console.log(imgs.value[0]);
         }
       }
       nextIndex();
@@ -72,10 +71,11 @@ export default defineComponent({
     };
     const prevIndex = () => {
       windowIndex.value--;
-      if (props.picture) {
+      if (pictures.value) {
         windowIndex.value < 0
-          ? (windowIndex.value = (windowIndex.value % props.picture.length) + props.picture.length)
-          : (windowIndex.value = windowIndex.value % props.picture.length);
+          ? (windowIndex.value =
+              (windowIndex.value % pictures.value.length) + pictures.value.length)
+          : (windowIndex.value = windowIndex.value % pictures.value.length);
       }
     };
     const prev = () => {
@@ -85,15 +85,15 @@ export default defineComponent({
           entire.value.style.marginLeft = `${
             parseInt(entire.value.style.marginLeft) + props.imgWidth
           }px`;
+          entire.value?.prepend(imgs.value[imgs.value.length - 1]);
           entire.value.style.transform = `translateX(${
             -parseInt(entire.value.style.marginLeft) - props.imgWidth
           }px)`;
+          imgs.value.unshift(imgs.value[imgs.value.length - 1]);
+          imgs.value.pop();
         }
-        entire.value?.prepend(imgs.value[imgs.value.length - 1]);
-        imgs.value.unshift(imgs.value[imgs.value.length - 1]);
-        imgs.value.pop();
-        prevIndex();
       }
+      prevIndex();
     };
     onMounted(() => {
       if (entire.value instanceof HTMLElement) {

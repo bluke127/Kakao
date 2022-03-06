@@ -48,6 +48,7 @@ import BaseInput from '@/components/BaseInput.vue';
 import BaseButton from '@/components/BaseButton.vue';
 import { defineComponent, reactive, ref, onMounted } from 'vue';
 import { useStore } from 'vuex';
+import { loginApi } from '@/api/index';
 import router from '@/router';
 type buttonStyleType = {
   backgroundImage?: string;
@@ -97,10 +98,11 @@ export default defineComponent({
       className: 'hover',
     });
     const login = () => {
-      console.log(store.state.user);
       if (!idValue.value || !passwordValue.value) {
         return;
       }
+      const info = { email: idValue.value, password: passwordValue.value };
+      loginApi.FETCH_LOGIN(info);
       store.dispatch('user/SET_EMAIL', `${idValue.value}@kakao.com`);
       router.push({ path: '/' });
     };

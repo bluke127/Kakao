@@ -9,9 +9,7 @@
         </div>
       </div>
       <div>
-        <SlideWindow :picture="picture" :imgWidth="500" />
-        <Carousel :sliders="picture" :imgWidth="500" />
-        <div class=""></div>
+        <Carousel :slides="picture" :imgWidth="500" />
       </div>
     </div>
   </div>
@@ -19,10 +17,10 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import SlideWindow from '@/components/SlideWindow.vue';
-import Carousel from '@/components/Carousel.vue';
+// import SlideWindow from '@/components/SlideWindow.vue';
+import Carousel from '@/components/Carousel/Carousel.vue';
 export default defineComponent({
-  components: { SlideWindow, Carousel },
+  components: { Carousel },
   props: {
     topImg: { type: String },
     picture: { type: Array, default: () => ['가', '나', '다'] },

@@ -1,12 +1,12 @@
 <template>
   <div>
     <ul class="list">
-      <li v-for="(e, i) in buy" :key="i" class="list_inner">
-        <p class="buy_img"><img :src="e.img" /></p>
+      <li v-for="(item, i) in buy" :key="i" class="list_inner" @click="storeShoping(item)">
+        <p class="buy_img"><img :src="item.img" /></p>
         <div class="buy_content">
           <span class="lock"></span>
-          <p class="buy_title">{{ e.title }}</p>
-          <p class="buy_price">{{ e.price }}</p>
+          <p class="buy_title">{{ item.title }}</p>
+          <p class="buy_price">{{ item.price }}</p>
         </div>
       </li>
     </ul>
@@ -14,10 +14,39 @@
 </template>
 
 <script lang="ts">
+import router from '@/router';
+import { useStore } from 'vuex';
 import { defineComponent } from 'vue';
 export default defineComponent({
   props: {
     buy: { type: Array },
+  },
+  setup(props, context) {
+    const store = useStore();
+    const storeShoping = (item: any) => {
+      if (store.state.user.email) {
+        context.emit('buyList', item);
+        if (
+          store.state.shoping.shopinglist.length > 0 &&
+          store.state.shoping.shopinglist.includes(item)
+        ) {
+          console.log(1);
+          store.state.shoping.shopinglist.forEach((e: { [key: string]: string }, i: number) => {
+            if (e === item) {
+              store.state.shoping.shopinglist.splice(i, 1);
+              store.dispatch('shoping/SET_SHOPINGLIST', item);
+              return;
+            }
+          });
+        } else {
+          console.log(2);
+          store.dispatch('shoping/SET_SHOPINGLIST', item);
+        }
+      } else {
+        router.push({ path: '/login' });
+      }
+    };
+    return { store, storeShoping };
   },
 });
 </script>

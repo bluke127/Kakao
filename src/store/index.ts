@@ -1,17 +1,17 @@
 import { createStore } from 'vuex';
 import { menu, menuRootState } from './modules/menu';
 import { user, UserRootState } from './modules/user';
-import { shopinglist, shopingListRootState } from './modules/shopingList';
+import { shoping, shopingRootState } from './modules/shoping';
 
 export interface RootState {
   menu: menuRootState;
   user: UserRootState;
-  shopinglist: shopingListRootState;
+  shopinglist: shopingRootState;
 }
 export default createStore({
   modules: {
     menu,
-    shopinglist,
+    shoping,
     user,
   },
 });

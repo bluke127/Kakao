@@ -8,7 +8,8 @@
         <div v-else-if="userEmail" class="need_login">
           {{ userEmail.replace('@kakao.com', '') }}
         </div>
-        <div>비회원 주문조회</div>
+        <div v-if="!store.state.user.email">비회원 주문조회</div>
+        <div v-else @click="$router.push('/login')">로그아웃</div>
       </div>
       <div class="img">
         <img
@@ -17,7 +18,14 @@
       </div>
       <ul class="list_wrap">
         <li class="list">
-          <div>장바구니 내역</div>
+          <div>
+            장바구니 내역
+            <ul class="shoping_list">
+              <li v-for="(item, index) in buylist" :key="index">
+                {{ item.title }}
+              </li>
+            </ul>
+          </div>
           <div>주문 배송 내역</div>
         </li>
         <li class="charac">
@@ -58,6 +66,7 @@
 <script lang="ts">
 import { defineComponent, computed, ref, onMounted } from 'vue';
 import { useStore } from 'vuex';
+
 export default defineComponent({
   setup() {
     const store = useStore();
@@ -65,6 +74,7 @@ export default defineComponent({
     const sideMenuFlag = computed(() => {
       return store.state.menu.ShowSideMenuFlag;
     });
+    const buylist = ref(store.state.shoping.shopinglist);
     const userEmail = ref<string>('');
     const closeSideMenu = () => {
       if (sideMenu.value) {
@@ -87,7 +97,7 @@ export default defineComponent({
         userEmail.value = store.state.user.email;
       }
     });
-    return { store, sideMenuFlag, sideMenu, closeSideMenu, arrow, toggleArrow, userEmail };
+    return { store, sideMenuFlag, sideMenu, buylist, closeSideMenu, arrow, toggleArrow, userEmail };
   },
 });
 </script>
