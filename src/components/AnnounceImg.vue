@@ -10,6 +10,7 @@
       </div>
       <div>
         <SlideWindow :picture="picture" :imgWidth="500" />
+        <Carousel :sliders="picture" :imgWidth="500" />
         <div class=""></div>
       </div>
     </div>
@@ -19,8 +20,9 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import SlideWindow from '@/components/SlideWindow.vue';
+import Carousel from '@/components/Carousel.vue';
 export default defineComponent({
-  components: { SlideWindow },
+  components: { SlideWindow, Carousel },
   props: {
     topImg: { type: String },
     picture: { type: Array, default: () => ['가', '나', '다'] },
@@ -29,7 +31,6 @@ export default defineComponent({
     time: { type: String },
     title: { type: String },
   },
-  setup() {},
 });
 </script>
 
